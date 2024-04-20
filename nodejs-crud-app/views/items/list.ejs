@@ -1,17 +1,52 @@
+<!-- views/items/list.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Items List</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Items List</h1>
-  <ul>
-    <% items.forEach(item => { %>
-      <li><%= item.name %> - <%= item.description %></li>
-    <% }); %>
-  </ul>
-  <a href="/items/new">Add New Item</a>
+  <div class="container mt-4">
+    <h1>Items List</h1>
+    
+    <!-- Table to display items -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% items.forEach(item => { %>
+          <tr>
+            <td><%= item.name %></td>
+            <td><%= item.description %></td>
+            <td>
+              <!-- Edit button -->
+              <a href="/items/<%= item._id %>/edit" class="btn btn-primary btn-sm me-2">Edit</a>
+              <!-- Delete form -->
+              <form action="/items/<%= item._id %>/delete" method="POST" style="display: inline;">
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+    <!-- Add new item button -->
+    <a href="/items/new" class="btn btn-success">Add New Item</a>
+  </div>
+
+  <!-- Optional: Include Bootstrap JS (if needed) -->
+  <!-- Bootstrap requires Popper.js and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
