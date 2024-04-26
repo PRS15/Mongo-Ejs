@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-mongoose.connect('mongodb+srv://premrajesh152:vtpJHVrJh8hmVW3O@mongodb.var4d2f.mongodb.net/crudApp', {
+mongoose.connect('mongodb://localhost:27017/crudApp', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
